@@ -1,22 +1,16 @@
 import React from "react";
 import * as tmPose from '@teachablemachine/pose';
 
-const URL = "https://teachablemachine.withgoogle.com/models/C5gH-o1AU/";
-let model, webcam, ctx, labelContainer, maxPredictions, cnt, std, timer;
+const URL = "https://teachablemachine.withgoogle.com/models/azqsp2tS5/";
+let model, webcam, ctx, labelContainer, maxPredictions, cnt, std;
 
 let load;
 
 let count= 0;
 let stand = "Stand";
 
-let yoga;
-let startTime = 0;
-let isCheck = true;
-let seconds = 0;
-
 const modelURL = URL + "model.json";
 const metadataURL = URL + "metadata.json";
-
 
 async function init() {
     model = await tmPose.load(modelURL, metadataURL);
@@ -54,8 +48,6 @@ async function init() {
     std.appendChild(document.createElement("div"));
     load = document.getElementById("load");
     load.innerHTML = "";
-    timer = document.getElementById("timer");
-    timer.appendChild(document.createElement("div"));
 }
 
 async function stop() {
@@ -67,19 +59,6 @@ async function loop(timestamp) {
     webcam.update(); // update the webcam frame
     await predict();
     window.requestAnimationFrame(loop);
-    
-    if(yoga > 0.75){
-        if(isCheck === false){
-            startTime = parseInt(parseInt(timestamp) / 1000);
-            isCheck = true;
-            // console.log("Start time : " + timestamp);
-        }
-        seconds = parseInt(parseInt(timestamp) / 1000) - startTime;
-    }else{
-        isCheck =false;
-        seconds = 0;
-    }
-
     // console.log("currnent time : " + timestamp);
 
 }
@@ -93,24 +72,19 @@ async function predict() {
 
     for (let i = 0; i < maxPredictions; i++) {
         const classPrediction = prediction[i].className + ": " + prediction[i].probability.toFixed(2);
-        if(prediction[i].className ==="Stand" && prediction[i].probability > 0.9){
-            if(stand === "Squat"){
+        if(prediction[i].className ==="Standby" && prediction[i].probability > 0.9){
+            if(stand === "Push Up"){
                 stand = "Stand";
                 count++;
             }
         }
-        if(prediction[i].className ==="Squat" && prediction[i].probability > 0.9){
-            stand = "Squat";
-        }
-
-        if(prediction[i].className ==="Yoga"){
-            yoga = parseFloat(prediction[i].probability);
+        if(prediction[i].className ==="Push Up" && prediction[i].probability > 0.9){
+            stand = "Push Up";
         }
         labelContainer.childNodes[i].innerHTML = classPrediction;
     }
     cnt.childNodes[0].innerHTML = "count : " + count;
     std.childNodes[0].innerHTML = stand;
-    timer.childNodes[0].innerHTML = "time : " + seconds;
     // finally draw the poses
     drawPose(pose);
 }
@@ -119,7 +93,7 @@ function drawPose(pose) {
     if (webcam.canvas) {
         ctx.drawImage(webcam.canvas, 0, 0);
         // draw font
-        ctx.fillText('Seconds : ' + seconds, 10, 50);
+        ctx.fillText('Count : ' + count, 10, 50);
         // draw the keypoints and skeleton
         if (pose) {
             const minPartConfidence = 0.5;
@@ -149,7 +123,6 @@ class Button extends React.Component{
                 <div style={{fontSize : 50}} id="label-container" />
                 <div style={{fontSize : 50}} id="std"></div>
                 <div style={{fontSize : 50}} id="cnt"></div>
-                <div style={{fontSize : 50}} id="timer"></div>
             </div>
         );
     }

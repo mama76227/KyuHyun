@@ -1,11 +1,20 @@
 import React from 'react';
-const Tae = ({history}) => {
+import TaeKwon from '../component/TaeKwon';
+
+const Tae = ({ history }) => {
     return (
+      <>
         <div>
-            <h1>태권도 채널입니다</h1>
-            <button onClick={ () => {history.goBack()} }> 뒤로 버튼 </button>
+          <h3> 태권도 페이지입니다. </h3>
+          <button onClick={() => { history.goBack() }}> 뒤로 버튼 </button>
         </div>
-    )
-}
+        <div className="App">
+          <header className="App-header">
+            <TaeKwon />
+          </header>
+        </div>
+      </>
+    );
+  }
 
 export default Tae;

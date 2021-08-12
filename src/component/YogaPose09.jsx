@@ -1,17 +1,16 @@
 import React from "react";
 import * as tmPose from '@teachablemachine/pose';
 
-const URL = "https://teachablemachine.withgoogle.com/models/C5gH-o1AU/";
-let model, webcam, ctx, labelContainer, maxPredictions, cnt, std, timer;
+const URL = "https://teachablemachine.withgoogle.com/models/mI5_AAoqW/"; // Yoga_09 cloud model
+let model, webcam, ctx, labelContainer, maxPredictions, std, timer;
 
 let load;
 
-let count= 0;
 let stand = "Stand";
 
 let yoga;
 let startTime = 0;
-let isCheck = true;
+let isCheck = false;
 let seconds = 0;
 
 const modelURL = URL + "model.json";
@@ -19,6 +18,7 @@ const metadataURL = URL + "metadata.json";
 
 
 async function init() {
+
     model = await tmPose.load(modelURL, metadataURL);
 
     // load the model and metadata
@@ -47,9 +47,6 @@ async function init() {
         labelContainer.appendChild(document.createElement("div"));
     }
 
-
-    cnt = document.getElementById("cnt");
-    cnt.appendChild(document.createElement("div"));
     std = document.getElementById("std");
     std.appendChild(document.createElement("div"));
     load = document.getElementById("load");
@@ -93,22 +90,12 @@ async function predict() {
 
     for (let i = 0; i < maxPredictions; i++) {
         const classPrediction = prediction[i].className + ": " + prediction[i].probability.toFixed(2);
-        if(prediction[i].className ==="Stand" && prediction[i].probability > 0.9){
-            if(stand === "Squat"){
-                stand = "Stand";
-                count++;
-            }
-        }
-        if(prediction[i].className ==="Squat" && prediction[i].probability > 0.9){
-            stand = "Squat";
-        }
-
-        if(prediction[i].className ==="Yoga"){
+        
+        if(prediction[i].className === "Yoga_09"){
             yoga = parseFloat(prediction[i].probability);
         }
         labelContainer.childNodes[i].innerHTML = classPrediction;
     }
-    cnt.childNodes[0].innerHTML = "count : " + count;
     std.childNodes[0].innerHTML = stand;
     timer.childNodes[0].innerHTML = "time : " + seconds;
     // finally draw the poses
@@ -144,12 +131,11 @@ class Button extends React.Component{
                 <button type='button' onClick={init}>start</button>
                 <button type='button' onClick={stop}>stop</button>
 
-                <div style={{fontSize : 50}} id="load">Loading...</div>
+                <div style={{ fontSize: 50 }} id="load">Loading...</div>
                 <div><canvas id="canvas" /></div>
-                <div style={{fontSize : 50}} id="label-container" />
-                <div style={{fontSize : 50}} id="std"></div>
-                <div style={{fontSize : 50}} id="cnt"></div>
-                <div style={{fontSize : 50}} id="timer"></div>
+                <div style={{ fontSize: 50 }} id="label-container" />
+                <div style={{ fontSize: 50 }} id="std"></div>
+                <div style={{ fontSize: 50 }} id="timer"></div>
             </div>
         );
     }
