@@ -10,7 +10,7 @@ const Squat = ({ history }) => {
       </div>
       <div className="App">
         <header className="App-header">
-          <Button />
+          <Button /> 
         </header>
       </div>
     </>

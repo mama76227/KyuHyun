@@ -13,7 +13,7 @@ const Container = styled.div`
   width: 100%;
   height: 100%;
   background: linear-gradient(
-      to right,
+      to right, 
       rgba(20, 20, 20, 0.1) 10%,
       rgba(20, 20, 20, 0.7) 70%,
       rgba(20, 20, 20, 1)

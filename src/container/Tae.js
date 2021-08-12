@@ -15,6 +15,6 @@ const Tae = ({ history }) => {
         </div>
       </>
     );
-  }
+  } 
 
 export default Tae;

@@ -93,7 +93,7 @@ async function predict() {
         
         if(prediction[i].className === "Yoga_01"){
             yoga = parseFloat(prediction[i].probability);
-        }
+        } 
         labelContainer.childNodes[i].innerHTML = classPrediction;
     }
     std.childNodes[0].innerHTML = stand;

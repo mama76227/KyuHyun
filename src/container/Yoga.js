@@ -8,7 +8,7 @@ const useStyles = makeStyles((theme) => ({
       },
     },
   }));
-const Yoga = ({history}) => {
+const Yoga = ({history}) => { 
     const classes = useStyles();
     return (
         <div className={classes.root}>

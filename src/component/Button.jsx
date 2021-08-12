@@ -61,7 +61,7 @@ async function init() {
 async function stop() {
     webcam.stop();
 }
-
+ 
 async function loop(timestamp) {
 
     webcam.update(); // update the webcam frame

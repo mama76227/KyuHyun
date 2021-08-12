@@ -15,7 +15,7 @@ const push_up = ({ history }) => {
         </div>
       </>
     );
-  }
+  }  
 
 
 export default push_up;

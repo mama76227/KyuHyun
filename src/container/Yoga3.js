@@ -9,6 +9,6 @@ const Yoga = () => {
             요가동작 3
         </div>
     )
-}
+} 
 
 export default Yoga;

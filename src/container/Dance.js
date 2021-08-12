@@ -8,4 +8,4 @@ const Dance = ({history}) => {
     )
 }
 
-export default Dance;
+export default Dance;  

@@ -6,4 +6,4 @@ render(){
         )
     }
 }
-export default Viewer;
+export default Viewer; 

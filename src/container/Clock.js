@@ -60,7 +60,7 @@ const Container = styled.div`
 
 const CurDate = styled.div`
   font-size: 24px;
-`;
+`; 
 
 const CurDay = styled.div`
   font-style: italic;

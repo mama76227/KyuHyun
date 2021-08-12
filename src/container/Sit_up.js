@@ -14,5 +14,5 @@ const sit_up = ({ history }) => {
         </div>
       </>
     );
-  }
+  }  
 export default sit_up;

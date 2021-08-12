@@ -10,5 +10,5 @@ const Yoga = () => {
         </div>
     )
 }
-
+ 
 export default Yoga;

@@ -35,7 +35,7 @@ async function init() {
     ctx = canvas.getContext("2d");
     // set font style
     ctx.font = "48px serif";
-
+ 
     labelContainer = document.getElementById("label-container");
     for (let i = 0; i < maxPredictions; i++) { // and class labels
         labelContainer.appendChild(document.createElement("div"));
