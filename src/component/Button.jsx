@@ -1,7 +1,7 @@
 import React from "react";
 import * as tmPose from '@teachablemachine/pose';
 
-const URL = "https://teachablemachine.withgoogle.com/models/C5gH-o1AU/";
+const URL = "https://teachablemachine.withgoogle.com/models/csKsnT3xu/";
 let model, webcam, ctx, labelContainer, maxPredictions, cnt, std, timer;
 
 let load;

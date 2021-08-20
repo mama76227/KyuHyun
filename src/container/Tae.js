@@ -1,5 +1,5 @@
 import React from 'react';
-import TaeKwon from '../component/TaeKwon';
+import TaeKwon01 from '../component/TaeKwon01';
 
 const Tae = ({ history }) => {
     return (
@@ -10,7 +10,9 @@ const Tae = ({ history }) => {
         </div>
         <div className="App">
           <header className="App-header">
-            <TaeKwon />
+            <TaeKwon01 />
+            {/* <TaeKwom02 /> */}
+            {/* <TaeKwon03 /> */}
           </header>
         </div>
       </>
